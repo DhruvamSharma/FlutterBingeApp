@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>375090720934-ke9ehftasos2qn0ipj71231btjf74udq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.375090720934-ke9ehftasos2qn0ipj71231btjf74udq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>375090720934-jpvmfoisbh7ulg4179ijr3thmku6j95a.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC4RD6n_juUuv2nygDS9y2vuhY8VMSTdKo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>375090720934</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.dhruvam.binge</string>
+	<key>PROJECT_ID</key>
+	<string>binge-ad250</string>
+	<key>STORAGE_BUCKET</key>
+	<string>binge-ad250.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:375090720934:ios:5058793a405a494a</string>
+	<key>DATABASE_URL</key>
+	<string>https://binge-ad250.firebaseio.com</string>
+</dict>
+</plist>
