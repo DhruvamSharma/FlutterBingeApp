@@ -1,6 +1,21 @@
-# binge_app
+# Fluttery Binge
 
-A new Flutter application.
+A restaurant listing application that shows nearby restaurants, their details, images, a detail screen for menu and much more.
+You can even play a video in the detail screen.
+
+### Caution: This application only works on iOS and hasn't been configured for Android.
+
+Features:
+1. Firebase Login with Email and Google Account.
+2. Restaurant Listings.
+3. Video Playback.
+4. Realtime data
+5. User Management.
+
+
+### Screenshots
+
+<img src="https://github.com/DhruvamSharma/FlutterBingeApp/blob/master/docs/sign_up_screen.png" height=500 width=300><img src="https://github.com/DhruvamSharma/FlutterBingeApp/blob/master/docs/login_screen.png" height=500 width=300><img src="https://github.com/DhruvamSharma/FlutterBingeApp/blob/master/docs/main_screen.png" height=500 width=300><img src="https://github.com/DhruvamSharma/FlutterBingeApp/blob/master/docs/detail_screen.png" height=500 width=300>
 
 ## Getting Started
 
