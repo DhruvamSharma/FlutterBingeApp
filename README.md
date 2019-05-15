@@ -7,10 +7,10 @@ You can even play a video in the detail screen.
 
 Features:
 1. Firebase Login with Email and Google Account.
-2. Restaurant Listings.
-3. Video Playback.
-4. Realtime data
-5. User Management.
+2. Cloud Firestore database.
+3. Restaurant Listings.
+4. Video Playback.
+5. Realtime data.
 
 
 ### Screenshots
