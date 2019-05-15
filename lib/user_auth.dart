@@ -1,3 +1,4 @@
+import 'package:binge_app/auth_bloc.dart';
 import 'package:binge_app/main.dart';
 import 'package:binge_app/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,8 @@ class _UserAuthState extends State<UserAuth> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   VoidCallback _showForgetPasswordSheet;
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  FirebaseAuth _auth = authBloc.auth;
+  final GoogleSignIn _googleSignIn = authBloc.googleSignIn;
 
   Future<FirebaseUser> signIn() async {
     GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
@@ -164,7 +165,6 @@ class _UserAuthState extends State<UserAuth> {
                     color: Colors.white,
                     onPressed: () {
                       signIn().then((user) {
-                        Navigator.pop(context);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: 'Binge',)));
 
                       }).catchError((error) {

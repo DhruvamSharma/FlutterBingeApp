@@ -1,3 +1,4 @@
+import 'package:binge_app/auth_bloc.dart';
 import 'package:binge_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,11 +13,11 @@ class UserSignUp extends StatefulWidget {
 class _UserSignUpState extends State<UserSignUp> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  FirebaseAuth auth = authBloc.auth;
+  final GoogleSignIn googleSignIn = authBloc.googleSignIn;
 
   Future<FirebaseUser> signIn() async {
-    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+    GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth =
     await googleSignInAccount.authentication;
 
@@ -24,14 +25,14 @@ class _UserSignUpState extends State<UserSignUp> {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    final FirebaseUser user = await _auth.signInWithCredential(credential);
+    final FirebaseUser user = await auth.signInWithCredential(credential);
     print("signed in " + user.displayName);
     return user;
   }
 
   Future<FirebaseUser> signUpWithEmailAndPassword(
       String email, String password) async {
-    final FirebaseUser user = await _auth.createUserWithEmailAndPassword(
+    final FirebaseUser user = await auth.createUserWithEmailAndPassword(
         email: email, password: password);
     return user;
   }
@@ -158,7 +159,6 @@ class _UserSignUpState extends State<UserSignUp> {
                     color: Colors.white,
                     onPressed: () {
                       signIn().then((user) {
-                        Navigator.pop(context);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: 'Binge',)));
 
                       }).catchError((error) {

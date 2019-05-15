@@ -1,3 +1,4 @@
+import 'package:binge_app/auth_bloc.dart';
 import 'package:binge_app/detail_screen.dart';
 import 'package:binge_app/user_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -65,10 +66,9 @@ class _MyHomePageState extends State<MyHomePage> {
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(icon: Icon(Icons.call_missed_outgoing),
-              onPressed: () {
-            FirebaseAuth.instance.signOut().then((value) {
-              Navigator.of(context).pop();
-            });
+              onPressed: () async{
+            await authBloc.auth.signOut();
+            Navigator.of(context).pop();
           })
         ],
       ),
