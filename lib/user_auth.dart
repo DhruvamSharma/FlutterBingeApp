@@ -1,4 +1,5 @@
 import 'package:binge_app/main.dart';
+import 'package:binge_app/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -65,12 +66,14 @@ class _UserAuthState extends State<UserAuth> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+
+                Center(child: Image.network('https://firebasestorage.googleapis.com/v0/b/binge-ad250.appspot.com/o/unnamed-2.png?alt=media&token=cfb8e6da-aea2-4760-a378-a562e1aece77', height: 200)),
                 Padding(
                   padding: EdgeInsets.only(left: 0, right: 32),
-                  child: Text('Welcome',
+                  child: Text('Login',
                       style: Theme.of(context)
                           .textTheme
-                          .display2
+                          .display1
                           .copyWith(color: Colors.black)),
                 ),
                 SizedBox(height: 48.0),
@@ -114,7 +117,6 @@ class _UserAuthState extends State<UserAuth> {
                                 passwordError = null;
                                 emailError = null;
                               });
-                              Navigator.pop(context);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: 'Binge',)));
 
                         }).catchError((error) {
@@ -136,7 +138,9 @@ class _UserAuthState extends State<UserAuth> {
                       },
                       color: Theme.of(context).accentColor,
                       child:
-                          Text('Login', style: Theme.of(context).textTheme.button),
+                          Text('Login', style: Theme.of(context).textTheme.button.copyWith(
+                            color: Colors.white
+                          )),
                     ),
 
                     FlatButton(
@@ -155,6 +159,30 @@ class _UserAuthState extends State<UserAuth> {
                 ),
 
                 SizedBox(height: 24.0),
+                Center(
+                  child: RaisedButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      signIn().then((user) {
+                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: 'Binge',)));
+
+                      }).catchError((error) {
+                        //TODO show error in a snackbar
+
+                      });
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Image.network('https://media.licdn.com/dms/image/C4D0BAQHiNSL4Or29cg/company-logo_200_200/0?e=2159024400&v=beta&t=0e00tehBFFtuqgUCfAijpOkoBl89jxOTIe_k9HHpi_4',
+                          width: 30,
+                        ),
+                        Text('Sign In')
+                      ],
+                    ),
+                  ),
+                ),
 
               ],
             ),
@@ -171,7 +199,7 @@ class _UserAuthState extends State<UserAuth> {
 
     _scaffoldKey.currentState
         .showBottomSheet((context) {
-          return Container();
+          return UserSignUp();
         })
         .closed
         .whenComplete(() {

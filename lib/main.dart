@@ -2,6 +2,7 @@ import 'package:binge_app/detail_screen.dart';
 import 'package:binge_app/user_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.deepOrange,
+        //fontFamily: 'NotoSans'
       ),
       home: UserAuth(),
     );
@@ -60,22 +62,70 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.call_missed_outgoing),
+              onPressed: () {
+            FirebaseAuth.instance.signOut().then((value) {
+              Navigator.of(context).pop();
+            });
+          })
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('restaurants').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting)
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              return ListView.builder(
-                  itemCount: snapshot.data.documents.length,
-                  itemBuilder: (context, i) {
-                    return buildList(snapshot.data.documents[i]);
-                  });
-            }),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+
+
+              StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance.collection('restaurants').snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting)
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    return Container(
+                      height: 200,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: snapshot.data.documents.length,
+                          itemBuilder: (context, i) {
+                            return buildOfferList(snapshot.data.documents[i]);
+                          }),
+                    );
+                  }),
+
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('4 Restaurants'.toUpperCase(),
+                  style: Theme.of(context).textTheme.subhead.copyWith(
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance.collection('restaurants').snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting)
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    return ListView.builder(
+                      shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemCount: snapshot.data.documents.length,
+                        itemBuilder: (context, i) {
+                          return buildList(snapshot.data.documents[i]);
+                        });
+                  }),
+            ],
+          ),
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -148,4 +198,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+  Widget buildOfferList(DocumentSnapshot snapshot) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Image.network(
+        snapshot.data['profile_pic'],
+        height: 80,
+        width: 250,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
 }
+
+
