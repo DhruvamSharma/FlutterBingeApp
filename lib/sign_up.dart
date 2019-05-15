@@ -114,7 +114,6 @@ class _UserSignUpState extends State<UserSignUp> {
                             passwordError = null;
                             emailError = null;
                           });
-                          Navigator.pop(context);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: 'Binge',)));
 
                         }).catchError((error) {
